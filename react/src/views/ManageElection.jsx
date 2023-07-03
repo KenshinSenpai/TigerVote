@@ -86,14 +86,6 @@ export default function ManageElection() {
         setElection((prevState) => ({ ...prevState, [fieldName]: fieldValue }));
     };
 
-    // const handleSelectChange = (event) => {
-    //     const selectedYearLevelID = event.target.value;
-    //     setElection(prevState => ({
-    //       ...prevState,
-    //       yearLevelID: selectedYearLevelID,
-    //     }));
-    // };
-
     const handleSelectChange = (event, field) => {
         const selectedValue = event.target.value;
         setElection(prevState => ({
@@ -283,6 +275,21 @@ export default function ManageElection() {
                                 </div>
                             </div>
                             {/* Election Start Date and Time */}
+
+                            {/* Add Voter to Election */}
+                            <div className="border-b border-gray-900/10 pb-8">
+                                <div className="grid lg:grid-cols-2 gap-4 content-start sm:grid-cols-1">
+                                    <div>
+                                        <label
+                                            htmlFor="endDate"
+                                            className="block text-sm font-medium text-gray-700"
+                                        >
+                                            Add Batch Voters
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Add Voter to Election */}
                         </div>
 
                         <div className="mt-6 mb-6 flex items-center justify-end mr-6 gap-x-6">
