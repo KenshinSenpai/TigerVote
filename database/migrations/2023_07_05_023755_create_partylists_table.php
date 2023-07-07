@@ -8,14 +8,15 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('voter', function (Blueprint $table) {
+        Schema::create('partylists', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class, 'userID');
-            $table->string('department');
-            $table->integer('yearLevel');
+            $table->string("partylistName")->unique();
+            $table->string("partylistAbrv");
             $table->foreignIdFor(\App\Models\Election::class, 'electionID');
             $table->timestamps();
         });
@@ -23,9 +24,11 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('voter');
+        Schema::dropIfExists('partylists');
     }
 };

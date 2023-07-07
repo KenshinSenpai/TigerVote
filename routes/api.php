@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/election', [ElectionController::class, 'index']);
     Route::put('/createElection/{id}', [ElectionController::class, 'update']);
     Route::get('/elections/{id}', [ElectionController::class, 'show']);
+    Route::post('/elections/{id}/uploadVoter', [ElectionController::class, 'uploadFile']);
 });
 
 Route::post('/getvotercode', [AuthController::class, 'checkEmail']);

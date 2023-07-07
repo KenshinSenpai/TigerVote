@@ -7,6 +7,8 @@ import DefaultLayout from "./components/DefaultLayout";
 import Elections from "./views/Election";
 import CreateElection from "./views/CreateElection";
 import ManageElection from "./views/ManageElection";
+import StepForm from "./components/StepForm";
+import VotingLayout from "./components/VotingLayout";
 
 const router = createBrowserRouter([
     {
@@ -30,8 +32,16 @@ const router = createBrowserRouter([
                 element: <CreateElection />
             },
             {
+                path: '/elections/stepform',
+                element: <StepForm />
+            },
+            {
                 path: '/elections/:id',
                 element: <ManageElection />
+            },
+            {
+                path: '/voting',
+                element: <VotingLayout />
             },
         ]
     },

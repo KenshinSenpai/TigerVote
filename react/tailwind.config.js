@@ -1,29 +1,42 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require('@tailwindcss/aspect-ratio'),
-    require("daisyui"),
-    require("tw-elements/dist/plugin.cjs"),
-  ],
+    content: [
+        "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [
+        require("@tailwindcss/forms"),
+        require('@tailwindcss/aspect-ratio'),
+        require("daisyui"),
+        require("tw-elements/dist/plugin.cjs"),
+    ],
 
-  daisyui: {
-    themes: ["lemonade"], // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
-    darkTheme: "dark", // name of one of the included themes for dark mode
-    base: true, // applies background color and foreground color for root element by default
-    styled: true, // include daisyUI colors and design decisions for all components
-    utils: true, // adds responsive and modifier utility classes
-    rtl: false, // rotate style direction from left-to-right to right-to-left. You also need to add dir="rtl" to your html tag and install `tailwindcss-flip` plugin for Tailwind CSS.
-    prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
-    logs: true,
-  },
+    daisyui: {
+        themes: [{
+            mytheme: {
+
+                "primary": "#14532d",
+
+                "secondary": "#f59e0b",
+
+                "accent": "#9ca3af",
+
+                "neutral": "#191a3e",
+
+                "base-100": "#ffffff",
+
+                "info": "#60a5fa",
+
+                "success": "#16a34a",
+
+                "warning": "#ea580c",
+
+                "error": "#dc2626",
+            },
+        }, ],
+    },
 }
-

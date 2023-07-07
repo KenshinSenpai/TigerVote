@@ -24,7 +24,7 @@ export default function Elections() {
     <PageComponent
       title="Elections"
       buttons={(
-        <TButton color="green" to="/elections/create">
+        <TButton color="green" to="/elections/stepform">
           <PlusCircleIcon className="h-6 w-6 mr-2"/>
           Create New
         </TButton>

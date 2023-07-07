@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Voter extends Model
 {
     use HasFactory;
+    protected $table = 'voter';
 
     protected $fillable = [
-        'userID', 'departmentID', 'yearLevelID', 'electionID', 'voterCode'
+        'userID', 'department', 'yearLevel', 'electionID'
     ];
 }

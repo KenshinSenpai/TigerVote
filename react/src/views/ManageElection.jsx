@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import axiosClient from "../axios";
+import PositionsForm from "../components/forms/PositionsForm";
 
 export default function ManageElection() {
     const { id } = useParams();
@@ -36,6 +37,29 @@ export default function ManageElection() {
         yearLevel: [],
         department: [],
     });
+
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+    };
+
+    const handleUpload = () => {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        axiosClient.post(`/elections/${id}/uploadVoter`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(response => {
+            // Handle response from Laravel
+            console.log(response.data);
+        }).catch(error => {
+            // Handle error
+            console.error(error);
+        });
+    };
 
     useEffect(() => {
         axiosClient.get(`/elections/${id}`)
@@ -89,10 +113,10 @@ export default function ManageElection() {
     const handleSelectChange = (event, field) => {
         const selectedValue = event.target.value;
         setElection(prevState => ({
-          ...prevState,
-          [field]: selectedValue,
+            ...prevState,
+            [field]: selectedValue,
         }));
-      };
+    };
 
     const onSubmit = (ev) => {
         ev.preventDefault();
@@ -121,12 +145,15 @@ export default function ManageElection() {
 
     return (
         <div>
-            <PageComponent title="Create New Election">
+            <PageComponent title="Edit Election">
                 <form action="#" method='POST' onSubmit={onSubmit}>
-                   
+
                     <div className="shadow sm:overflow-hidden sm:rounded-md">
                         <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                             {/* Title */}
+                            <h2 className="text-base font-semibold leading-7 text-gray-900">
+                                Election Information
+                            </h2>
                             <div className="col-span-6 sm:col-span-3">
                                 <label
                                     htmlFor="title"
@@ -278,24 +305,77 @@ export default function ManageElection() {
 
                             {/* Add Voter to Election */}
                             <div className="border-b border-gray-900/10 pb-8">
-                                <div className="grid lg:grid-cols-2 gap-4 content-start sm:grid-cols-1">
-                                    <div>
-                                        <label
-                                            htmlFor="endDate"
-                                            className="block text-sm font-medium text-gray-700"
-                                        >
-                                            Add Batch Voters
-                                        </label>
-                                    </div>
+                                <h2 className="text-base font-semibold leading-7 text-gray-900 pb-6">
+                                    Add Voters
+                                </h2>
+                                <p className="text-sm leading-6 text-gray-600">Upload a <strong className="text-gray-900">CSV File</strong> containing the following information: Name, Email, Department, and Year Level</p>
+                                <div className="mt-2 flex justify-start gap-x-6">
+                                    <input
+                                        type="file"
+                                        onChange={ handleFileChange }
+                                        className="file-input file-input-bordered w-full max-w-xs" />
+                                    <button
+                                        onClick={handleUpload}
+                                        className="rounded-md border-2 border-slate-900 px-4 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-900 hover:text-white hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
+                                    >
+                                        Upload
+                                    </button>
                                 </div>
                             </div>
                             {/* Add Voter to Election */}
+
+                            {/* Add Positions to Election */}
+                            <PositionsForm />
+                            {/* <div className="border-b border-gray-900/10 pb-12">
+                                <h2 className="text-base font-semibold leading-7 text-gray-900 pb-6">
+                                    Add Positions
+                                </h2>
+                                <div className="grid lg:grid-cols-2 gap-4 content-start sm:grid-cols-1">
+                                    <div>
+                                        <label
+                                            htmlFor="position"
+                                            className="block text-sm font-medium leading-6 text-gray-900"
+                                        >
+                                            Position Name
+                                        </label>
+                                        <div className="mt-2">
+                                            <input
+                                                type="text"
+                                                name="position"
+                                                id="position"
+                                                placeholder="President"
+                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-900 sm:text-sm sm:leading-6"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label
+                                            htmlFor="positionAbrv"
+                                            className="block text-sm font-medium leading-6 text-gray-900"
+                                        >
+                                            Position Abbreviation
+                                        </label>
+                                        <div className="mt-2">
+                                            <input
+                                                type="text"
+                                                name="positionAbrv"
+                                                id="positionAbrv"
+                                                placeholder="Pres"
+                                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-900 sm:text-sm sm:leading-6"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> */}
+                            {/* Add Positions to Election */}
+
                         </div>
 
                         <div className="mt-6 mb-6 flex items-center justify-end mr-6 gap-x-6">
                             <Link
                                 type="button"
-                                className="text-sm font-semibold leading-6 text-gray-900 hover:text-red-700 hover:border-2 hover:border-red-700"
+                                className="text-sm font-semibold leading-6 text-gray-900 hover:text-red-700 hover:rounded-sm hover:border-red-700"
                                 to="/elections"
                             >
                                 Cancel
