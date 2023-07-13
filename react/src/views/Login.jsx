@@ -5,7 +5,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 export default function Login() {
-  const { setCurrentUser, setUserToken } = useStateContext();
+  const { setCurrentUser, setUserToken, setCurrentRole } = useStateContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -21,13 +21,16 @@ export default function Login() {
     .then(({ data }) => {
       setCurrentUser(data.user)
       setUserToken(data.token)
+      setCurrentRole(data.roleID)
+      console.log(data);
     })
     .catch(({ response }) => {
       console.error(response);
     });
   };
 
-  const handleTogglePassword = () => {
+  const handleTogglePassword = (ev) => {
+    ev.preventDefault();
     setShowPassword(!showPassword);
   };
 

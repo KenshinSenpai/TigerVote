@@ -1,32 +1,7 @@
 /* eslint-disable react/prop-types */
-
-// import axios from "axios";
-// import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ElectionTable = ({ data }) => {
-
-  // const [election, setElection] = useState();
-
-  // useEffect(() => {
-  //   axios.get('/yearLevel')
-  //       .then(response => {
-  //       setElection(prevState => ({ ...prevState, yearLevel: response.data }));
-  //       })
-  //       .catch(error => {
-  //       console.log(error);
-  //       });
-    
-  //   axios.get('/department')
-  //       .then(response => {
-  //       setElection(prevState => ({ ...prevState, department: response.data }));
-  //       })
-  //       .catch(error => {
-  //       console.log(error);
-  //       });
-  //   }, []);
-
-    
 
     if (!Array.isArray(data) || data.length === 0) {
         return <p>No data available.</p>;

@@ -6,7 +6,14 @@ import GuestLayout from "./components/GuestLayout";
 import DefaultLayout from "./components/DefaultLayout";
 import Elections from "./views/Election";
 import CreateElection from "./views/CreateElection";
-import ManageElection from "./views/ManageElection";
+import ElectionManagement from "./views/ElectionManagement";
+import ElectionInformation from "./components/form/ElectionInformation";
+import Position from "./components/form/Position";
+import Partylist from "./components/form/Partylist";
+import Voter from "./components/form/Voter";
+import Candidate from "./components/form/Candidate";
+import VotingLayout from "./components/VotingLayout";
+import VotingForm from "./views/VotingForm";
 
 const router = createBrowserRouter([
     {
@@ -31,7 +38,33 @@ const router = createBrowserRouter([
             },
             {
                 path: '/elections/:id',
-                element: <ManageElection />
+                element: <ElectionManagement />,
+                children: [
+                    {
+                        path: '/elections/:id/electionInformation',
+                        element: <ElectionInformation />
+                    },
+                    {
+                        path: '/elections/:id/position',
+                        element: <Position />
+                    },
+                    {
+                        path: '/elections/:id/partylist',
+                        element: <Partylist />
+                    },
+                    {
+                        path: '/elections/:id/candidate',
+                        element: <Candidate />
+                    },
+                    {
+                        path: '/elections/:id/voter',
+                        element: <Voter />
+                    },
+                ]
+            },
+            {
+                path: '/elections/create',
+                element: <CreateElection />
             },
         ]
     },
@@ -46,6 +79,16 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup />
+            },
+        ]
+    },
+    {
+        path: '/voting',
+        element: <VotingLayout />,
+        children: [
+            {
+                path: '/voting/:id',
+                element: <VotingForm />
             },
         ]
     },

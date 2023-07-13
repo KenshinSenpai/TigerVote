@@ -11,14 +11,14 @@ export default function Elections() {
 
   useEffect(() => {
     axiosClient.get('/election')
-    .then((response) => {
-      setElections(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then((response) => {
+        setElections(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
-  
+
 
   return (
     <PageComponent
@@ -29,7 +29,7 @@ export default function Elections() {
           Create New
         </TButton>
       )}>
-      <ElectionTable data={ elections }/>
+      <ElectionTable data={elections} />
     </PageComponent>
   )
 }

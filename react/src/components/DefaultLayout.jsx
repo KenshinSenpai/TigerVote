@@ -18,11 +18,16 @@ function classNames(...classes) {
 }
 
 export default function DefaultLayout() {
-    const { currentUser, userToken, setCurrentUser, setUserToken } = useStateContext();
-
+    const { currentUser, userToken, setCurrentUser, setUserToken, currentRole } = useStateContext();
+    console.log(currentRole);
     if(!userToken) {
         return <Navigate to='login' />
     }
+
+    if (currentRole === 3) {
+      return <Navigate to="/voting" />;
+    }
+
     const logout = (ev) => {
         ev.preventDefault();
         axiosClient.post('/logout').then((res) => {
